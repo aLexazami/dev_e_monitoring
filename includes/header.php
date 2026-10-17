@@ -1,9 +1,6 @@
 <?php
 // includes/header.php
 require_once __DIR__ . '/../config/app.php';
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 // Redirect if unauthenticated
 if (!isset($_SESSION['user_id'])) {
@@ -13,26 +10,29 @@ if (!isset($_SESSION['user_id'])) {
 
 $pageTitle = $pageTitle ?? 'Dashboard';
 $userRole  = $_SESSION['role'] ?? 'staff';
+$userName  = $_SESSION['full_name'] ?? $_SESSION['username'] ?? 'User';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle); ?> | Capstone System</title>
+    <title><?= htmlspecialchars($pageTitle); ?> | <?= htmlspecialchars(APP_NAME); ?></title>
+    
+    <!-- Dynamic CSS Path -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
 
 <nav class="navbar">
-    <a href="#" class="brand">G64 Capstone System</a>
+    <a href="<?= BASE_URL ?>/index.php" class="brand"><?= htmlspecialchars(APP_NAME); ?></a>
     <div class="user-info">
-        <span>Welcome, <strong><?= htmlspecialchars($_SESSION['full_name']); ?></strong></span>
-        <span class="role-badge role-<?= htmlspecialchars($userRole); ?>">
-            <?= htmlspecialchars($userRole); ?>
+        <span>Welcome, <strong><?= htmlspecialchars($userName); ?></strong></span>
+        <span class="role-badge role-<?= htmlspecialchars(strtolower($userRole)); ?>">
+            <?= htmlspecialchars(ucfirst($userRole)); ?>
         </span>
-        <a href="<?= BASE_URL ?>/backend/process_logout.php">Logout</a>
+        <a href="<?= BASE_URL ?>/backend/process_logout.php" class="logout-btn">Logout</a>
     </div>
 </nav>
 
-<main class="main-container"></main>
+<main class="main-container">

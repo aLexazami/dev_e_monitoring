@@ -1,0 +1,30 @@
+# Environment variables (CRITICAL)
+.env
+.env.local
+.env.*.local
+
+# Dependency management (if using Composer or npm later)
+/vendor/
+/node_modules/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs & Temporary files
+*.log
+/logs/
+/tmp/
+
+# User uploads (optional - exclude uploaded files in dev)
+/uploads/*
+!/uploads/.gitkeep

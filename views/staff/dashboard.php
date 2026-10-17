@@ -165,44 +165,6 @@ $staffStation = trim($staffContext['assigned_station'] ?? '');
             font-weight: bold;
         }
 
-        /* Hardware Simulator Button Strip */
-        .simulator-bar {
-            background: #161b22;
-            border: 1px dashed var(--card-border);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .simulator-bar h4 {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            color: white;
-            font-weight: bold;
-            transition: opacity 0.2s;
-        }
-
-        .btn:hover { opacity: 0.85; }
-        .btn-good { background: #238636; }
-        .btn-ng { background: #da3633; }
-
         /* Hourly Bar Chart Simulation */
         .bars-container {
             display: flex;
@@ -330,7 +292,8 @@ $staffStation = trim($staffContext['assigned_station'] ?? '');
                         <span style="color:var(--brand-orange)">■ NG</span>
                     </div>
                 </div>
-                <div class="bars-container" id="hourly-chart"><p style="color:var(--text-secondary);font-size:.85rem">Hourly station-level data is not available yet.</p>
+                <div class="bars-container" id="hourly-chart">
+                    <p style="color:var(--text-secondary);font-size:.85rem">Hourly station-level data is not available yet.</p>
                 </div>
             </div>
 
@@ -350,8 +313,7 @@ $staffStation = trim($staffContext['assigned_station'] ?? '');
             <!-- Activity Stream -->
             <div class="card">
                 <div class="chart-header" style="background:#0d419d">RECENT SHIFT ACTIVITY</div>
-                <div id="activity-log-list"><p style="color:var(--text-secondary);font-size:.85rem">Loading activity…</p>
-                </div>
+                <div id="activity-log-list"><p style="color:var(--text-secondary);font-size:.85rem">Loading activity…</p></div>
             </div>
 
             <!-- Latest Defect Reports -->
@@ -364,8 +326,12 @@ $staffStation = trim($staffContext['assigned_station'] ?? '');
 
     </main>
 
-    <!-- AJAX Logic and Live API Integrations -->
-<script>const BASE_URL = <?= json_encode(BASE_URL); ?>;</script>
-<script src="<?= BASE_URL ?>/assets/js/dashboard.js"></script>
+    <!-- Global App State Initialization -->
+    <script>
+        window.APP_CONFIG = {
+            baseUrl: <?= json_encode(BASE_URL); ?>
+        };
+    </script>
+    <script src="<?= BASE_URL ?>/assets/js/dashboard.js"></script>
 </body>
 </html>
